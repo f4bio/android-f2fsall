@@ -9,15 +9,17 @@ f2fs=(
 	"run_program(\"/sbin/busybox\", \"mount\", \"/system\");"
 	)
 
+TOOLSDIR="$(dirname $0)/tools"
+
 echo "doing checks..."
-[[ ! -f "tools/signapk.jar" ]] && echo "signapk not found" && exit 1
-[[ ! -f "tools/7za" ]] && echo "7za not found" && exit 1
-[[ ! -f "tools/md5sum" ]] && echo "md5sum not found" && exit 1
+[[ ! -f "$TOOLSDIR/signapk.jar" ]] && echo "signapk not found" && exit 1
+[[ ! -f "$TOOLSDIR/7za" ]] && echo "7za not found" && exit 1
+[[ ! -f "$TOOLSDIR/md5sum" ]] && echo "md5sum not found" && exit 1
 [[ ! -f "$1" ]] && echo "no such file $1" && exit 1
 
-P7ZIP="./tools/7za"
-SIGNAPK="java -jar ./tools/signapk.jar ./tools/testkey.x509.pem ./tools/testkey.pk8"
-MD5SUM="./tools/md5sum"
+P7ZIP="$TOOLSDIR/7za"
+SIGNAPK="java -jar $TOOLSDIR/signapk.jar $TOOLSDIR/testkey.x509.pem $TOOLSDIR/testkey.pk8"
+MD5SUM="$TOOLSDIR/md5sum"
 
 WORKINGDIR="$(mktemp -d)"
 FILEIN="$1"
