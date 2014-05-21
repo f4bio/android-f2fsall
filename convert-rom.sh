@@ -18,7 +18,7 @@ echo "doing checks..."
 [[ ! -f "$1" ]] && echo "no such file $1" && exit 1
 
 P7ZIP="$TOOLSDIR/7za"
-SIGNAPK="java -jar $TOOLSDIR/signapk.jar $TOOLSDIR/testkey.x509.pem $TOOLSDIR/testkey.pk8"
+SIGNAPK="java -jar $TOOLSDIR/signapk.jar $TOOLSDIR/publickey.x509.pem $TOOLSDIR/privatekey.pk8"
 MD5SUM="$TOOLSDIR/md5sum"
 
 WORKINGDIR="$(mktemp -d)"
@@ -42,7 +42,7 @@ sed -i -e "s#${ext4[1]}#${f2fs[1]}#" "$WORKINGDIR/META-INF/com/google/android/up
 
 echo "updating..."
 sh -c "cp $FILEIN $WORKINGDIR/$FILESIGNED"
-sh -c "$P7ZIP u -r -m0 $WORKINGDIR/$FILESIGNED $WORKINGDIR/META-INF > /dev/null"
+sh -c "$P7ZIP u $WORKINGDIR/$FILESIGNED $WORKINGDIR/META-INF > /dev/null"
 
 echo "signing..."
 sh -c "$SIGNAPK $WORKINGDIR/$FILESIGNED $BASEDIR/$FILESIGNED"
