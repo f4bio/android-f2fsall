@@ -53,4 +53,4 @@ sh -c "$MD5SUM $BASEDIR/$FILESIGNED > $BASEDIR/$FILESIGNED.md5"
 echo "cleaning up the mess..."
 rm -rf "$WORKINGDIR"
 
-echo "all done! your files are in: $BASEDIR"
+echo "all done! your files are in: $(realpath $BASEDIR)"
