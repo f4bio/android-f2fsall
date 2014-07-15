@@ -11,7 +11,7 @@ f2fs=(
 
 TOOLSDIR="$(dirname $0)/tools"
 
-echo "doing checks..."
+echo "checking environment..."
 [[ ! -f "$TOOLSDIR/signapk.jar" ]] && echo "signapk not found" && exit 1
 [[ ! -f "$TOOLSDIR/7za" ]] && echo "7za not found" && exit 1
 [[ ! -f "$TOOLSDIR/md5sum" ]] && echo "md5sum not found" && exit 1
